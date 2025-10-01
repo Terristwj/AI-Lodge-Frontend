@@ -1,34 +1,75 @@
-/**
- * Root App Component
- * This is the main component that serves as the entry point for our chatbot application.
- * It provides the overall layout and contains the ChatContainer component.
- */
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
-import ChatContainer from './components/Chat/ChatContainer'
-import './App.css'
+// First Activity: First Button
+import MyButton from "./components/myButton.jsx";
+
+// Second Activity: Counter Buttons
+import IncreaseButton from "./components/IncreaseButton.jsx";
+import DecreaseButton from "./components/DecreaseButton.jsx";
+
+// Third Activity: Reusable Button Component
+import MyButton2 from "./components/MyButton2.jsx";
 
 function App() {
-  return (
-    <div className="app-container">
-      {/* Main application wrapper with full height and centered content */}
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
-        {/* Header Section */}
-        <div className="w-full max-w-4xl">
-          <header className="text-center mb-6">
-            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">
-              AI Lodge Chatbot
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Your intelligent conversation partner
-            </p>
-          </header>
+    const [count, setCount] = useState(0);
 
-          {/* Main Chat Interface */}
-          <ChatContainer />
-        </div>
-      </div>
-    </div>
-  )
+    function handleIncrease() {
+        setCount((count) => count + 1);
+    }
+
+    function handleDecrease() {
+        setCount((count) => count - 1);
+    }
+
+    return (
+        <>
+            <div>
+                <a href="https://vite.dev" target="_blank">
+                    <img src={viteLogo} className="logo" alt="Vite logo" />
+                </a>
+                <a href="https://react.dev" target="_blank">
+                    <img
+                        src={reactLogo}
+                        className="logo react"
+                        alt="React logo"
+                    />
+                </a>
+            </div>
+            <h1>Vite + React</h1>
+            <div className="card">
+                <div>Current count: {count}</div>
+                <br />
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "10px",
+                        justifyContent: "center",
+                        marginBottom: "20px",
+                    }}
+                >
+                    {/* First Activity: First Button */}
+                    {/* <MyButton /> */}
+
+                    {/* Second Activity: Counter Buttons */}
+                    {/* <IncreaseButton />
+                    <DecreaseButton /> */}
+
+                    {/* Third Activity: Reusable Button Component */}
+                    <MyButton2 changeCount={handleIncrease} label="Increase" />
+                    <MyButton2 changeCount={handleDecrease} label="Decrease" />
+                </div>
+                <p>
+                    Edit <code>src/App.jsx</code> and save to test HMR
+                </p>
+            </div>
+            <p className="read-the-docs">
+                Click on the Vite and React logos to learn more
+            </p>
+        </>
+    );
 }
 
-export default App
+export default App;
