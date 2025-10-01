@@ -7,7 +7,7 @@
  * across different components.
  */
 
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import apiService from '@/services/api'
 
 /**
@@ -24,9 +24,6 @@ export const useChat = () => {
 
   // State for storing any error messages
   const [error, setError] = useState(null)
-
-  // Ref to store the current conversation ID (persists across re-renders)
-  const conversationIdRef = useRef(null)
 
   /**
    * Send a message to the chatbot
@@ -57,20 +54,12 @@ export const useChat = () => {
 
     try {
       // Call the API to get bot response
-      const response = await apiService.sendMessage(
-        messageText.trim(),
-        conversationIdRef.current
-      )
+      const response = await apiService.sendMessage(messageText.trim())
 
-      // Store conversation ID for future messages
-      if (response.conversationId) {
-        conversationIdRef.current = response.conversationId
-      }
-
-      // Create bot message object
+      // Create bot message object using the new API response format
       const botMessage = {
         id: Date.now() + 1, // Ensure unique ID
-        text: response.message || response.reply || 'I received your message.',
+        text: response.response || 'I received your message.',
         sender: 'bot',
         timestamp: new Date(),
       }
@@ -101,19 +90,9 @@ export const useChat = () => {
    * Clear all messages from the chat
    */
   const clearMessages = useCallback(async () => {
-    try {
-      // If we have a conversation ID, delete it on the backend
-      if (conversationIdRef.current) {
-        await apiService.clearConversation(conversationIdRef.current)
-      }
-    } catch (err) {
-      console.error('Error clearing conversation:', err)
-    } finally {
-      // Clear messages and reset conversation
-      setMessages([])
-      conversationIdRef.current = null
-      setError(null)
-    }
+    // Clear messages and reset state
+    setMessages([])
+    setError(null)
   }, [])
 
   /**

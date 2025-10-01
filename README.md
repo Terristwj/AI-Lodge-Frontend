@@ -273,38 +273,32 @@ Send a message to the chatbot
 ```json
 // Request
 {
-  "message": "Hello, bot!",
-  "conversationId": "optional-conversation-id"
+    "message": "Hello, how are you?",
+    "model": "gpt-3.5-turbo", // optional
+    "max_tokens": 1000, // optional
+    "temperature": 0.7 // optional
 }
-
 // Response
 {
-  "message": "Hi! How can I help you?",
-  "conversationId": "unique-conversation-id"
-}
-```
-
-### GET `/api/conversation/:id`
-
-Get conversation history
-
-```json
-// Response
-{
-  "messages": [
-    {
-      "id": "1",
-      "text": "Hello",
-      "sender": "user",
-      "timestamp": "2025-10-01T10:00:00Z"
+    "response": "Hello! I'm doing well, thank you for asking. How can I help you today?",
+    "model": "gpt-3.5-turbo",
+    "usage": {
+        "completion_tokens": 37,
+        "prompt_tokens": 13,
+        "total_tokens": 50,
+        "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+        }
     }
-  ]
 }
 ```
-
-### DELETE `/api/conversation/:id`
-
-Clear conversation history
 
 ### GET `/api/health`
 
