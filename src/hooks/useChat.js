@@ -2,7 +2,7 @@
  * Custom Hook: useChat
  * This hook manages all chat-related state and operations.
  * It provides a clean interface for components to interact with the chat functionality.
- * 
+ *
  * This is a core concept in React - custom hooks let us reuse stateful logic
  * across different components.
  */
@@ -18,13 +18,13 @@ export const useChat = () => {
   // State for storing all messages in the chat
   // Each message has: id, text, sender ('user' or 'bot'), timestamp
   const [messages, setMessages] = useState([])
-  
+
   // State for tracking if a message is currently being sent
   const [isLoading, setIsLoading] = useState(false)
-  
+
   // State for storing any error messages
   const [error, setError] = useState(null)
-  
+
   // Ref to store the current conversation ID (persists across re-renders)
   const conversationIdRef = useRef(null)
 
@@ -51,7 +51,7 @@ export const useChat = () => {
 
     // Add user message to the chat immediately (optimistic update)
     setMessages((prev) => [...prev, userMessage])
-    
+
     // Set loading state
     setIsLoading(true)
 
@@ -80,7 +80,7 @@ export const useChat = () => {
     } catch (err) {
       // Handle errors gracefully
       setError(err.message)
-      
+
       // Optionally add an error message to the chat
       const errorMessage = {
         id: Date.now() + 1,
@@ -89,7 +89,7 @@ export const useChat = () => {
         timestamp: new Date(),
         isError: true,
       }
-      
+
       setMessages((prev) => [...prev, errorMessage])
     } finally {
       // Always reset loading state
@@ -127,9 +127,7 @@ export const useChat = () => {
 
     if (lastUserMessage) {
       // Remove the error message and retry
-      setMessages((prev) => 
-        prev.filter((msg) => !msg.isError)
-      )
+      setMessages((prev) => prev.filter((msg) => !msg.isError))
       sendMessage(lastUserMessage.text)
     }
   }, [messages, sendMessage])
@@ -139,7 +137,7 @@ export const useChat = () => {
     if (messages.length === 0) {
       const welcomeMessage = {
         id: Date.now(),
-        text: 'Hello! I\'m your AI assistant. How can I help you today?',
+        text: "Hello! I'm your AI assistant. How can I help you today?",
         sender: 'bot',
         timestamp: new Date(),
       }

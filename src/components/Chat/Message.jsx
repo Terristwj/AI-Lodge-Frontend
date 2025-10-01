@@ -14,7 +14,7 @@ import { Bot, User } from 'lucide-react'
 const Message = ({ message }) => {
   // Determine if this is a user message
   const isUser = message.sender === 'user'
-  
+
   // Determine if this is an error message
   const isError = message.isError
 
@@ -50,15 +50,13 @@ const Message = ({ message }) => {
         )}
       >
         {/* Show appropriate icon */}
-        {isUser ? (
-          <User className="h-4 w-4" />
-        ) : (
-          <Bot className="h-4 w-4" />
-        )}
+        {isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
       </div>
 
       {/* Message Content */}
-      <div className={cn('flex flex-col gap-1 max-w-[75%]', isUser && 'items-end')}>
+      <div
+        className={cn('flex flex-col gap-1 max-w-[75%]', isUser && 'items-end')}
+      >
         {/* Sender Label */}
         <span className="text-xs text-muted-foreground">
           {isUser ? 'You' : 'AI Assistant'}
@@ -70,14 +68,15 @@ const Message = ({ message }) => {
             // Base message bubble styling
             'rounded-lg px-4 py-2 w-fit max-w-full break-words overflow-wrap-anywhere',
             // Different styling for user vs bot messages
-            isUser
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-muted',
+            isUser ? 'bg-primary text-primary-foreground' : 'bg-muted',
             // Error message styling
-            isError && 'bg-destructive/10 text-destructive border border-destructive/20'
+            isError &&
+              'bg-destructive/10 text-destructive border border-destructive/20'
           )}
         >
-          <p className="text-sm whitespace-pre-wrap break-words overflow-wrap-anywhere">{message.text}</p>
+          <p className="text-sm whitespace-pre-wrap break-words overflow-wrap-anywhere">
+            {message.text}
+          </p>
         </div>
 
         {/* Timestamp */}

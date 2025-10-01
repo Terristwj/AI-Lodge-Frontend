@@ -22,7 +22,7 @@ const TypingIndicator = () => {
       {/* Typing Animation Container */}
       <div className="flex flex-col gap-1">
         <span className="text-xs text-muted-foreground">AI Assistant</span>
-        
+
         {/* Animated Dots */}
         <div className="rounded-lg px-4 py-2 bg-muted">
           <div className="typing-indicator">

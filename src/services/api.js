@@ -2,7 +2,7 @@
  * API Service
  * This file contains all the functions that communicate with the backend API.
  * It uses axios to make HTTP requests.
- * 
+ *
  * NOTE FOR WORKSHOP: Update the BASE_URL to match your backend server URL
  */
 
@@ -44,11 +44,11 @@ const apiService = {
     } catch (error) {
       // Log the error for debugging
       console.error('Error sending message:', error)
-      
+
       // Throw a user-friendly error message
       throw new Error(
-        error.response?.data?.message || 
-        'Failed to send message. Please check your connection and try again.'
+        error.response?.data?.message ||
+          'Failed to send message. Please check your connection and try again.'
       )
     }
   },

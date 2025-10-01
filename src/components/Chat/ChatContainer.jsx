@@ -25,7 +25,7 @@ const ChatContainer = () => {
       <CardHeader className="border-b">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl">Chat</CardTitle>
-          
+
           {/* Clear Chat Button */}
           <Button
             variant="ghost"

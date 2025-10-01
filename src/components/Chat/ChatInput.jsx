@@ -24,7 +24,7 @@ const ChatInput = ({ onSendMessage, isLoading }) => {
    */
   const handleSubmit = (e) => {
     e.preventDefault() // Prevent page reload
-    
+
     // Only send if there's actual content and not currently loading
     if (inputValue.trim() && !isLoading) {
       onSendMessage(inputValue)
